@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .goods{
         display: flex;
         flex-wrap: wrap;/* 设置包裹,和GoodsListItem组件中的goods-item宽度结合会设置一行多少个 */

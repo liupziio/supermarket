@@ -10,7 +10,7 @@ export function request(config) {
 
     //1.创建axios实例
     const instance = axios.create({//create的实例返回值就是一个Promise
-        baseURL: 'http://152.136.185.210:8000/api/n3',
+        baseURL: '该地址为数据请求地址',
         timeout: 5000,
     })
 

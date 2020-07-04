@@ -3,8 +3,9 @@
  -->
 
 <template>
-  <div class="goods-item">
-      <img :src="goodsItem.show.img" alt="">
+  <div class="goods-item" @click="itemClick">
+    <!-- @load是监听图片加载完的方法，"绑定方法" -->
+      <img :src="showImage" alt="" @load="imageLoad">
       <div class="goods-info">
           <p>{{goodsItem.title}}</p>
           <span class="price">{{goodsItem.price}}</span>
@@ -22,12 +23,47 @@ export default {
                 return {}
             }
         }
-    }
+    },
+    computed: {
+      showImage() {
+        return this.goodsItem.image || this.goodsItem.show.img
+      }
+    },
+    methods: {
+      imageLoad(){//监听图片加载完成
+        //利用 $bus(事件总线) 发送出去一个图片加载完的自定义事件
+        if(this.$route.path.indexOf('/detail')){
+          this.$bus.$emit('itemImageLoad')
+        } else if (this.$route.path.indexOf('/home')){
+          this.$bus.$emit('detailItemImageLoad')
+        }
+        // this.$bus.$emit('itemImageLoad')
+        
+      },
+
+      itemClick(){
+        // this.$router.push({
+        //   path: '/detail',
+        //   query:{
+        //     iid: this.goodsItem.iid
+        //   }
+        // })
+        
+        // this.$router.push('/detail/' + this.goodsItem.iid)
+
+        if(this.$route.path.indexOf('/detail')){
+          this.$router.push('/detail/' + this.goodsItem.iid)
+        }
+          
+      }
+      
+    },
+   
 
 }
 </script>
 
-<style>
+<style scoped>
  .goods-item {
     padding-bottom: 40px;
     position: relative;
