@@ -1,5 +1,10 @@
 # supermarket
 
+## 项目的接口数据不是本人的，需要完整版请添加本人微信
+```
+15846561746
+```
+
 ## Project setup
 ```
 npm install
