@@ -14,7 +14,7 @@
 import BScroll from 'better-scroll'
 export default {
     props:{
-        probeType:{
+        probeType:{//这个需要等于3才会实时监听位置
             type:Number,
             default: 0,
         },

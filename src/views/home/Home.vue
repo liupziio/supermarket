@@ -49,8 +49,8 @@
   import TabControl from 'components/content/tabControl/TabControl'//读取选项卡子组件(多用)
   import GoodsList from 'components/content/goods/GoodsList'//读取商品数据大的子组件(多用)
   import Scroll from 'components/common/scroll/Scroll'//这里是封装的滚动组件(多用)
-  import BackTop from 'components/content/backTop/BackTop'//这里是回到顶部的小图片组件(多用)
-  
+
+  import {backTopMixin} from "common/mixin" //导入混入函数
 
   /* 主页的请求数据 */
   import {getHomeMultidata,getHomeGoods} from 'network/home' //导入home页请求的数据
@@ -64,7 +64,6 @@
       TabControl,//选项卡
       GoodsList,//数据子组件
       Scroll,//滚动顺滑子组件
-      BackTop,//回到顶部子组件
      
       
       
@@ -75,6 +74,7 @@
       
 
     },
+    mixins:[backTopMixin],
     data() {
       return {
         banners: [],    //这里来存储请求的轮播图数据
@@ -85,7 +85,6 @@
           'sell':{page: 0, list: []},
         },
         currentType: 'pop',//默认当前状态参数
-        isShowBackTop: false, //用来设置回到顶部的出现与隐藏
         tabOffsetTop: 0,//用来存储tabControl的offsetTop
         isTabFixed: false, //用来设置吸顶效果
         saveY: 0,//用来保存home的Y轴位置
@@ -116,6 +115,7 @@
     },
     created() { //组件创建完成，执行生命周期函数
       // console.log(this)
+        console.log('创建home')
       //1.请求轮播图和推荐图数据
         this.getHomeMultidata()
       //2.请求商品数据
@@ -178,19 +178,12 @@
         
       },
 
-      // 回到顶部点击事件
-      backClick(){
-        //通过ref来获取到scroll组件
-        //点击时这个refs=scroll的组件中scrollTo方法
-        this.$refs.scroll.scrollTo(0,0)
-      },
-
       //监听滚动的值来控制回到顶部组件的出现与隐藏
       contentScroll(position){
         //1.判断BackTop是否显示
           //因为y轴滚动时是负数，所以加一个 - 号变成正数
           //这个的isShowBackTop = true/false
-            this.isShowBackTop = (-position.y) > 1000
+            this.listenShoBackTop(position)
 
         //2.决定tabContorl是否吸顶(position:fixed)
            this.isTabFixed = (-position.y) > this.tabOffsetTop

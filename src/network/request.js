@@ -10,7 +10,7 @@ export function request(config) {
 
     //1.创建axios实例
     const instance = axios.create({//create的实例返回值就是一个Promise
-        baseURL: '该地址为数据请求地址',
+        baseURL: '该地址为数据请求地址',    //需要此地址请加我的VX 15846561746
         timeout: 5000,
     })
 
