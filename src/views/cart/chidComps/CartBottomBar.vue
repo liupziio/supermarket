@@ -1,3 +1,4 @@
+<!-- 负责购物车底部的购物车数量统计与计算的 -->
 <template>
   <div class="bottom-bar">
       <div class="check-content">
@@ -79,12 +80,12 @@ export default {
                 }
             },
             calcClick(){
-                if(!this.isSelectAll){  //全没选中
-                    this.$toast.show('购物车是空的哦~',2000)//使用自定义的文字和时间
+                if(this.isSelectAll){  //全没选中
+                    this.$toast.show('功能开发中~',1000)//使用自定义的文字和时间
                 } 
-                // else{
-                //     this.$toast.show('功能开发中~',2000)//使用自定义的文字和时间
-                // }
+                else{
+                    this.$toast.show('购物车是空的哦~',1000)//使用自定义的文字和时间
+                }
             }
         },
     
@@ -100,7 +101,6 @@ export default {
         /* bottom: 76px; */
         height: 40px;
         line-height: 40px;
-
         background-color: #eee;
         font-size: 14px;
   }
